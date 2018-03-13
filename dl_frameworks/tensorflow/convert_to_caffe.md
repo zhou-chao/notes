@@ -16,3 +16,4 @@
     - param[2]: `W_{hi} W_{hf} W_{ho} W_{hg}`
 * tensorflow format of weights
     - variables[0]: `[W_{xi} W_{hi}] [W_{xg} W_{hg}] [W_{xf} W_{hf}] [W_{xo} W_{ho}]`
+    - variables[1]: `b_i b_g b_f b_o`
