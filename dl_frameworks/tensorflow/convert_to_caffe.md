@@ -1,3 +1,13 @@
+# Batch Normalization
+ 
+We can merge a conv layer followed by a batch normalization layer into one single conv layer.
+
+The equation of a conv layer followed by a batch normalization layer: 
+- `y_conv = Wx + b`
+- `y = gamma * (y_conv - mean) / std_dev + beta`.
+
+Let `W' = gamma * W / std_dev` and `b' = gamma * (b - mean) / std_dev + beta`, then `y = W'x + b'`. 
+
 # LSTM layer
 
 * equations of LSTM
@@ -11,9 +21,15 @@
     ```
 
 * caffe format of weights
-    - param[0]: `W_{xi} W_{xf} W_{xo} W_{xg}`
-    - param[1]: `b_i b_f b_o b_g`
-    - param[2]: `W_{hi} W_{hf} W_{ho} W_{hg}`
+    - params[0]: `W_{xi} W_{xf} W_{xo} W_{xg}`
+    - params[1]: `b_i b_f b_o b_g`
+    - params[2]: `W_{hi} W_{hf} W_{ho} W_{hg}`
 * tensorflow format of weights
     - variables[0]: `[W_{xi} W_{hi}] [W_{xg} W_{hg}] [W_{xf} W_{hf}] [W_{xo} W_{ho}]`
     - variables[1]: `b_i b_g b_f b_o`
+
+# Multilayer Bidirectional LSTM
+
+The flipped input (`flip(x)`) along the sequence axis is fed into the backward LSTM layer.  
+
+The input of the next forward and backward LSTM layer is expressed as `x_{n+1} = concat(L_fw_n(x_n), flip(L_bw_n(flip(x_n))))`.
